@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import AIChatbox from './components/ai/AIChatbox';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -35,9 +34,6 @@ function App() {
       
       {/* Footer */}
       <Footer />
-      
-      {/* AI Chatbox - Fixed position */}
-      <AIChatbox />
     </div>
   );
 }

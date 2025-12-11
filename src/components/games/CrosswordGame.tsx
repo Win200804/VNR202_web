@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   keywordClues, 
@@ -27,12 +27,6 @@ const CrosswordGame = () => {
   // Tính toán số câu đã đúng
   const completedCount = Object.keys(correctAnswers).length;
   const totalClues = keywordClues.length;
-
-  // Tính độ rộng tối đa của grid
-  const maxLength = useMemo(() => 
-    Math.max(...keywordClues.map(c => c.answer.length)),
-    []
-  );
 
   // Tính vị trí offset cho mỗi hàng để căn giữa cột keyword
   const getRowOffset = useCallback((clue: typeof keywordClues[0]) => {
@@ -116,7 +110,7 @@ const CrosswordGame = () => {
   }, []);
 
   // Render một ô trong grid
-  const renderCell = (clue: typeof keywordClues[0], charIndex: number, rowIndex: number) => {
+  const renderCell = (clue: typeof keywordClues[0], charIndex: number) => {
     const char = correctAnswers[clue.id]?.[charIndex] || '';
     const isKeywordCell = charIndex === clue.keywordIndex;
     
@@ -138,7 +132,7 @@ const CrosswordGame = () => {
   };
 
   // Render một hàng trong grid
-  const renderRow = (clue: typeof keywordClues[0], index: number) => {
+  const renderRow = (clue: typeof keywordClues[0]) => {
     const offset = getRowOffset(clue);
     const isCompleted = !!correctAnswers[clue.id];
     
@@ -168,22 +162,12 @@ const CrosswordGame = () => {
         {/* Các ô của hàng */}
         <div className="flex" style={{ marginLeft: `${offset * 36}px` }}>
           {Array.from({ length: clue.answer.length }).map((_, charIndex) => 
-            renderCell(clue, charIndex, index)
+            renderCell(clue, charIndex)
           )}
         </div>
       </div>
     );
   };
-
-  // Lấy từ khóa đã reveal
-  const revealedKeyword = useMemo(() => {
-    return keywordClues.map(clue => {
-      if (correctAnswers[clue.id]) {
-        return clue.answer[clue.keywordIndex];
-      }
-      return '';
-    }).join('');
-  }, [correctAnswers]);
 
   return (
     <div className="vintage-card">
@@ -209,7 +193,7 @@ const CrosswordGame = () => {
           {/* Grid ô chữ */}
           <div className="bg-gradient-to-b from-green-50 to-green-100 p-6 rounded-lg border-2 border-green-200 mb-6 overflow-x-auto">
             <div className="min-w-fit">
-              {keywordClues.map((clue, index) => renderRow(clue, index))}
+              {keywordClues.map((clue) => renderRow(clue))}
             </div>
             
             {/* Decorations */}
