@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   RETRO VINTAGE THEME - Vietnam History
+   ======================================== */
+
+/* Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-body text-sepia-dark bg-paper-cream;
+    background-image: 
+      linear-gradient(rgba(245, 230, 211, 0.95), rgba(245, 230, 211, 0.95)),
+      url('/assets/images/paper-texture.png');
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-ink-brown;
+  }
+
+  /* Drop Cap for first paragraph */
+  .drop-cap::first-letter {
+    @apply float-left text-6xl font-heading text-red-accent mr-3 mt-1;
+    line-height: 0.8;
+  }
+}
+
+/* Component Styles */
+@layer components {
+  /* Vintage Card */
+  .vintage-card {
+    @apply bg-aged-paper border-2 border-vintage-border rounded-sm p-6;
+    @apply shadow-vintage hover:shadow-vintage-lg transition-shadow duration-300;
+    background-image: linear-gradient(135deg, rgba(232, 213, 183, 0.9) 0%, rgba(196, 167, 125, 0.3) 100%);
+  }
+
+  /* Decorative Border */
+  .decorative-border {
+    @apply border-4 border-double border-gold-accent p-4;
+  }
+
+  /* Vintage Button */
+  .vintage-btn {
+    @apply px-6 py-3 font-heading text-paper-cream bg-red-accent;
+    @apply border-2 border-ink-brown rounded-sm;
+    @apply hover:bg-ink-brown transition-colors duration-300;
+    @apply shadow-vintage hover:shadow-vintage-lg;
+  }
+
+  .vintage-btn-outline {
+    @apply px-6 py-3 font-heading text-ink-brown bg-transparent;
+    @apply border-2 border-ink-brown rounded-sm;
+    @apply hover:bg-ink-brown hover:text-paper-cream transition-colors duration-300;
+  }
+
+  /* Section Divider */
+  .section-divider {
+    @apply flex items-center justify-center my-8;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-gold-accent to-transparent;
+  }
+
+  .section-divider-icon {
+    @apply mx-4 text-gold-accent text-2xl;
+  }
+
+  /* Quote Box */
+  .vintage-quote {
+    @apply relative pl-8 py-4 italic font-decorative text-xl text-sepia-dark;
+    @apply border-l-4 border-gold-accent bg-paper-cream/50;
+  }
+
+  .vintage-quote::before {
+    content: '"';
+    @apply absolute left-2 top-0 text-5xl text-gold-accent/50 font-heading;
+  }
+
+  /* Timeline Styles */
+  .timeline-line {
+    @apply absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-gold-accent via-red-accent to-gold-accent;
+  }
+
+  .timeline-node {
+    @apply absolute left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full;
+    @apply bg-red-accent border-4 border-gold-accent;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply font-heading text-ink-brown hover:text-red-accent transition-colors duration-300;
+    @apply relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5;
+    @apply after:bg-red-accent after:transition-all after:duration-300;
+    @apply hover:after:w-full;
+  }
+
+  .nav-link-active {
+    @apply text-red-accent after:w-full;
+  }
+
+  /* Quiz Card */
+  .quiz-option {
+    @apply p-4 border-2 border-vintage-border rounded-sm cursor-pointer;
+    @apply hover:border-gold-accent hover:bg-paper-cream/80 transition-all duration-300;
+  }
+
+  .quiz-option-selected {
+    @apply border-gold-accent bg-gold-accent/20;
+  }
+
+  .quiz-option-correct {
+    @apply border-green-600 bg-green-100;
+  }
+
+  .quiz-option-incorrect {
+    @apply border-red-600 bg-red-100;
+  }
+
+  /* Game Card */
+  .game-card {
+    @apply vintage-card cursor-pointer;
+    @apply hover:scale-105 transition-transform duration-300;
+  }
+
+  .matching-card {
+    @apply p-4 bg-aged-paper border-2 border-vintage-border rounded-sm;
+    @apply hover:border-gold-accent cursor-pointer transition-all duration-300;
+    perspective: 1000px;
+  }
+
+  .matching-card-matched {
+    @apply border-green-600 bg-green-100/50;
+  }
+
+  /* Crossword Cell */
+  .crossword-cell {
+    @apply w-10 h-10 border border-ink-brown text-center font-heading text-lg;
+    @apply focus:outline-none focus:ring-2 focus:ring-gold-accent;
+  }
+
+  .crossword-cell-blocked {
+    @apply bg-ink-brown;
+  }
+
+  /* Map Game */
+  .map-region {
+    @apply fill-aged-paper stroke-ink-brown stroke-2;
+    @apply hover:fill-gold-accent/30 cursor-pointer transition-all duration-300;
+  }
+
+  .map-region-correct {
+    @apply fill-green-300;
+  }
+
+  .map-region-incorrect {
+    @apply fill-red-300;
+  }
+
+  /* AI Chatbox */
+  .chatbox-container {
+    @apply fixed bottom-6 right-6 z-50;
+  }
+
+  .chatbox-bubble {
+    @apply w-14 h-14 rounded-full bg-red-accent text-paper-cream;
+    @apply flex items-center justify-center cursor-pointer;
+    @apply shadow-vintage-lg hover:scale-110 transition-transform duration-300;
+  }
+
+  .chatbox-window {
+    @apply absolute bottom-20 right-0 w-80 h-96;
+    @apply vintage-card overflow-hidden flex flex-col;
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  /* Text Ornaments */
+  .text-ornament::before {
+    content: '❧ ';
+    @apply text-gold-accent;
+  }
+
+  .text-ornament::after {
+    content: ' ❧';
+    @apply text-gold-accent;
+  }
+
+  /* Scroll Animation Classes */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
+  }
+
+  .animate-on-scroll.visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Paper Effect */
+  .paper-effect {
+    background-image: 
+      radial-gradient(ellipse at top left, rgba(196, 167, 125, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 0, 0, 0.05) 0%, transparent 50%);
+  }
+
+  /* Vintage Shadow */
+  .vintage-shadow {
+    box-shadow: 
+      inset 0 0 30px rgba(62, 39, 35, 0.1),
+      0 4px 8px rgba(62, 39, 35, 0.2);
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8D5B7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B8860B;
+  border-radius: 6px;
+  border: 2px solid #E8D5B7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8B0000;
+}
+
+/* Selection */
+::selection {
+  background: rgba(184, 134, 11, 0.3);
+  color: #3E2723;
+}
+
